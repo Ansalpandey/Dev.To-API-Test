@@ -25,21 +25,31 @@ import coil.compose.AsyncImage
 import com.brevastudios.devto.model.ArticleItem
 import com.brevastudios.devto.uilayer.ArticleViewModel
 
+/**
+ * A Composable function that displays a list of articles.
+ *
+ * @param viewModel The view model that provides the data for the list.
+ */
 @Composable
 fun ArticleList(viewModel: ArticleViewModel = hiltViewModel()) {
-  val result = viewModel.articalStateHolder.value
+    val result = viewModel.articleStateHolder.value
 
-  if (result.isLoading) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-      CircularProgressIndicator()
+    if (result.isLoading) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
     }
-  }
-  if (result.error.isNotBlank()) {
-    Text(text = result.error)
-  }
-  result.data?.let { LazyColumn { items(result.data) { ArticleSingle(it = it) } } }
+    if (result.error.isNotBlank()) {
+        Text(text = result.error)
+    }
+    result.data?.let { LazyColumn { items(result.data) { ArticleSingle(it = it) } } }
 }
 
+/**
+ * A Composable function that displays a single article.
+ *
+ * @param it The article to display.
+ */
 @Composable
 fun ArticleSingle(it: ArticleItem) {
 

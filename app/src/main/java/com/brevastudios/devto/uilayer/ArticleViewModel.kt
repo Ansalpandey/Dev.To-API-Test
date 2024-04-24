@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ArticleViewModel @Inject constructor(private val repository: ArticleRepository) : ViewModel() {
 
-    val articalStateHolder = mutableStateOf(ArticleStateHolder())
+    val articleStateHolder = mutableStateOf(ArticleStateHolder())
 
     init {
         getAllArticles()
@@ -21,9 +21,9 @@ class ArticleViewModel @Inject constructor(private val repository: ArticleReposi
         viewModelScope.launch {
             try {
                 val articles = repository.getArticleList()
-                articalStateHolder.value = ArticleStateHolder(data = articles.data)
+                articleStateHolder.value = ArticleStateHolder(data = articles.data)
             } catch (e: Exception) {
-                articalStateHolder.value = ArticleStateHolder(error = "Failed to fetch articles: ${e.message}")
+                articleStateHolder.value = ArticleStateHolder(error = "Failed to fetch articles: ${e.message}")
             }
         }
     }

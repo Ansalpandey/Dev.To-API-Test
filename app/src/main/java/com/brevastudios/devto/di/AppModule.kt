@@ -11,10 +11,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
+/**
+ * A Dagger module that provides dependencies for the application.
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
 
+    /**
+     * Provides a Retrofit instance.
+     *
+     * @return A Retrofit instance.
+     */
     @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -22,15 +30,35 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    /**
+     * Provides an ApiService instance.
+     *
+     * @param retrofit A Retrofit instance.
+     * @return An ApiService instance.
+     */
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
+    /**
+     * Provides an com.brevastudios.devto.datalayer.ArticleDataSource instance.
+     *
+     * @param apiService An ApiService instance.
+     * @return An com.brevastudios.devto.datalayer.ArticleDataSource instance.
+     */
     @Provides
     fun provideDataSource(apiService: ApiService): ArticleDataSource {
         return ArticleDataSource(apiService)
     }
+
+    /**
+     * Provides an ArticleRepository instance.
+     *
+     * @param movieDataSource An com.brevastudios.devto.datalayer.ArticleDataSource instance.
+     * @return An ArticleRepository instance.
+     */
     @Provides
     fun provideMovieRepository(movieDataSource: ArticleDataSource) : ArticleRepository {
         return ArticleRepository(movieDataSource)

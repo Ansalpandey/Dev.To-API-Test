@@ -11,6 +11,9 @@ import com.brevastudios.devto.ui.theme.DevToTheme
 import com.brevastudios.devto.uilayer.screens.ArticleList
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * The main activity of the application.
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +22,12 @@ class MainActivity : ComponentActivity() {
       DevToTheme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          ArticleList()
+            /**
+             * Represents a list of articles.
+             */
+            ArticleList()
         }
       }
     }
   }
 }
-
-
