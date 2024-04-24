@@ -42,7 +42,7 @@ fun ArticleList(viewModel: ArticleViewModel = hiltViewModel()) {
     if (result.error.isNotBlank()) {
         Text(text = result.error)
     }
-    result.data?.let { LazyColumn { items(result.data) { ArticleSingle(it = it) } } }
+    result.data?.let { LazyColumn { items(result.data) { Article(it = it) } } }
 }
 
 /**
@@ -51,7 +51,7 @@ fun ArticleList(viewModel: ArticleViewModel = hiltViewModel()) {
  * @param it The article to display.
  */
 @Composable
-fun ArticleSingle(it: ArticleItem) {
+fun Article(it: ArticleItem) {
 
   Card(modifier = Modifier.fillMaxWidth().padding(12.dp).clickable {}) {
     AsyncImage(
