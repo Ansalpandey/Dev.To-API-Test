@@ -32,17 +32,17 @@ import com.brevastudios.devto.uilayer.ArticleViewModel
  */
 @Composable
 fun ArticleList(viewModel: ArticleViewModel = hiltViewModel()) {
-    val result = viewModel.articleStateHolder.value
+  val result = viewModel.articleStateHolder.value
 
-    if (result.isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
-        }
+  if (result.isLoading) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+      CircularProgressIndicator()
     }
-    if (result.error.isNotBlank()) {
-        Text(text = result.error)
-    }
-    result.data?.let { LazyColumn { items(result.data) { Article(it = it) } } }
+  }
+  if (result.error.isNotBlank()) {
+    Text(text = result.error)
+  }
+  result.data?.let { LazyColumn { items(result.data) { Article(it = it) } } }
 }
 
 /**
@@ -55,10 +55,11 @@ fun Article(it: ArticleItem) {
 
   Card(modifier = Modifier.fillMaxWidth().padding(12.dp).clickable {}) {
     AsyncImage(
-        model = it.cover_image,
-        contentDescription = "cover_image",
-        modifier = Modifier.fillMaxWidth().height(300.dp),
-        contentScale = ContentScale.FillBounds)
+      model = it.cover_image,
+      contentDescription = "cover_image",
+      modifier = Modifier.fillMaxWidth().height(300.dp),
+      contentScale = ContentScale.FillBounds,
+    )
     Spacer(modifier = Modifier.height(10.dp))
     Column(modifier = Modifier.fillMaxWidth().padding(12.dp)) {
       Text(text = it.title, fontSize = 24.sp, fontWeight = FontWeight.Bold)
